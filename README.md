@@ -1,3 +1,3 @@
-# CSE3910-Final-Project
+# CSE3910-Final-Project : Live Stock Prices
 
-Final Project
+Stock prices
