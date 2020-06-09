@@ -6,6 +6,8 @@ Modules Required:
  - BeautifulSoup
  - DateTime Module
 """
+
+
 import os, os.path,csv
 from os import path
 from datetime import datetime
@@ -13,10 +15,11 @@ import pandas as pd
 from bs4 import BeautifulSoup
 import requests
 
+
 # Making a function which can later be added into a stock class as a method.
 
 
-def getLivePrice(ticker='AMD'): # Getting the live prices
+def getLivePrice(ticker): # Getting the live prices
     url = 'https://ca.finance.yahoo.com/quote/{0}'.format(ticker) # The url used
     response = requests.get(url) # Using requests module to get the content
     yahoo_price_html = BeautifulSoup(response.content,'html.parser') # Converting content into html code
@@ -27,19 +30,32 @@ def getLivePrice(ticker='AMD'): # Getting the live prices
 
 
 
-def write_to_csv(value1, value2):
-    cur_dir = os.getcwd()  # getting current working directory
-    with open(os.path.join(cur_dir,'liveprices.csv'),'a') as f: # Creates file in this directory
+def write_to_csv(value1, value2,ticker):
+    # making directory to store Stock Data
+    if not os.path.exists('StockData'):
+        os.mkdir('StockData')
+    #
+    with open(os.path.join(os.getcwd()+"/StockData",'liveprices{0}.csv'.format(ticker)),'a+') as f: # Creates file in this directory
         f.writelines(value1 + "," + value2 + "\n")
+        f.close()
+
+def read_csv():
+    with open(os.path.join(os.getcwd()+"/StockData",'liveprices{0}.csv'.format(ticker)),'r') as f:
+        data = csv.reader(f)
+        for row in data:
+            print(row)
+        print('\n')
         f.close()
 
 
 if __name__ == "__main__":
     from time import sleep
-
+    ticker = 'AMD'
     for i in range(5):
-        sleep(2) # 2 sec delay
-        time,value = getLivePrice()
-        write_to_csv(time,value)
+        sleep(0.7) # I calculated this time to be the difference 1 and time it takes to grab data from google
+        time,value = getLivePrice(ticker)
+        write_to_csv(time,value,ticker)
+        read_csv()
+
 
 
