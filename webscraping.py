@@ -46,18 +46,39 @@ def ScapeDown(page):
     return array
 
 def getNewsStock(page):
-    newsArray = []
+    newsArray = [] # [news content, publisher, link]
     for data in page.findAll("div", {"class": "news-link-container"}): # searches for news class in entire page
         newsText = data.findAll(text=True) # returns all text and publisher
         newsLink = data.find('a').get('href') # search for links
         newsArray.append([newsText[0], newsText[1], newsLink]) # append to array to be used to find news sources
     return newsArray
 
+def getStockInfo(page): # returns stock name, full stock name, index, price, change, market cap (IN THAT ORDER)
+    title = page.find('title').text # find full name of stock
+
+    stockName = page.find('a', {'id': 'ticker'}).text # find stock name
+
+    indexText = page.find(text='Index') # find index
+    tdTag = indexText.parent
+    index = tdTag.findNext('td').text
+
+    markCapText = page.find(text='Market Cap') # find market cap
+    tdTag = markCapText.parent
+    markCap = tdTag.findNext('td').text
+
+    priceText = page.find(text='Price') # find price
+    tdTag = priceText.parent
+    price = tdTag.findNext('td').text
+
+    changeText = page.find(text='Change') # find change
+    tdTag = changeText.parent
+    change = tdTag.findNext('td').text
+
+    return stockName, title, index, price, change, markCap
 
 if __name__ == '__main__':
-    applePage = webScrapeURL("https://finviz.com/quote.ashx?t=AAPL")
-    news = getNewsStock(applePage)
-    for i in range(len(news)):
-        print(news[i])
+    applePage = webScrapeURL("https://finviz.com/quote.ashx?t=AMZN")
+    getStockInfo(applePage)
+
 
 
