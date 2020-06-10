@@ -53,7 +53,7 @@ if __name__ == "__main__":
     ticker = 'AMD'
     for i in range(5):
         sleep(0.7) # I calculated this time to be the difference 1 and time it takes to grab data from google
-        time,value = getLivePrice(ticker)
+        value,time = getLivePrice(ticker)
         write_to_csv(time,value,ticker)
         read_csv()
 
