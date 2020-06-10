@@ -16,23 +16,43 @@ class TopStocks:
         self._up = []
         self._down = []
 
-    # Getter Method
+    # Modify Methods
 
-    def getTop(self):
+    def ScrapeTop(self):
         website = BeautifulSoup(self.response.content,'html.parser')
         all_stocks = website.find_all('table',class_ = 't-home-table')[0]
         for line in all_stocks.find_all('tr'):
-            print(line.text)
-            print('\n')
-        #top_stocks = all_stocks.find_all(class_ = 'table-light-cp-row')
-        #print(top_stocks)
+            self._up.append(line.find('td').text)
+        # First element is the word 'TICKER', therefore must be removed
+        self._up.pop(0)
 
+    def ScapeDown(self):
+        website = BeautifulSoup(self.response.content, 'html.parser')
+        all_stocks = website.find_all('table', class_='t-home-table')[1]
+        for line in all_stocks.find_all('tr'):
+            self._down.append(line.find('td').text)
+        # First element is the word 'TICKER', therefore must be removed
+        self._down.pop(0)
+    # Getter
+
+    def getTop(self):
+        return self._up
+
+    def getDown(self):
+        return self._down
 
 
 
 
 if __name__ == "__main__":
     top = TopStocks()
-    top.getTop()
+    top.ScrapeTop()
+    top.ScapeDown()
+
+    print(top.getTop())
+    print(top.getDown())
+
+
+
 
 
