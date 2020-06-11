@@ -5,5 +5,6 @@ What you need to install:
 - Pandas
 - Requests
 - lxml
+- html parser
 
-Stock prices
+-- I can make the code install the libraries Palaash.... I will add that at the very end of our code so the user only has to run the thing
