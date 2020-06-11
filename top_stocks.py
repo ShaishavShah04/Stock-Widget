@@ -6,6 +6,7 @@ Will Scan the Top 5 Stocks that have gained %, and 5 that has dropped %
 
 from bs4 import BeautifulSoup
 import requests
+from webscraping import *
 import os.path, os
 
 class TopStocks:

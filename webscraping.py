@@ -24,13 +24,17 @@ def getLivePrice(page): # Getting the live prices and a time
     time = datetime.now().strftime("%M:%S")
     return price,time
 
+
 def ScrapeTop(page):
-    # website = BeautifulSoup(self.response.content,'html.parser')
-    array =[]
-    all_stocks = page.find_all('table',class_ = 't-home-table')[0]
+    #website = BeautifulSoup(self.response.content, 'html.parser')
+    array = []
+    all_stocks = page.find_all('table', class_='t-home-table')[0]
     for line in all_stocks.find_all('tr'):
-        array.append(line.find('td').text)
-    # First element is the word 'TICKER', therefore must be removed
+        stock_info = []
+        mini_array = line.find_all('td')
+        for i in range(4):
+            stock_info.append(mini_array[i].text)
+        array.append(stock_info)
     array.pop(0)
     return array
 
@@ -39,8 +43,11 @@ def ScrapeDown(page):
     array = []
     all_stocks = page.find_all('table', class_='t-home-table')[1]
     for line in all_stocks.find_all('tr'):
-        array.append(line.find('td').text)
-    # First element is the word 'TICKER', therefore must be removed
+        stock_info = []
+        mini_array = line.find_all('td')
+        for i in range(4):
+            stock_info.append(mini_array[i].text)
+        array.append(stock_info)
     array.pop(0)
     return array
 
@@ -80,7 +87,9 @@ def getStockInfo(page): # returns stock name, full stock name, index, price, cha
 
 if __name__ == '__main__':
     applePage = webScrapeURL("https://finviz.com/quote.ashx?t=AMZN")
-    getStockInfo(applePage)
+    #getStockInfo(applePage)
+    page = webScrapeURL("https://finviz.com/")
+    print(ScrapeTop(page))
 
 
 
