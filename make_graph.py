@@ -1,56 +1,45 @@
 """
 Shaishav Shah
 Making the graph now using the Matplotlib library
+This uses all the stuff from live_prices.py...so that file isnt really needed after this
+What this code does:
+- Directly uses the getliveprice function and plots it.
+- Writing it into the csv is not nessasary, but I am writing it for future use
+
+
 """
 from live_prices import *
-import csv
-
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-from matplotlib import style
-
-import pandas as pd
-import numpy as np
-import plotly
 
 
-def makegraph(filename):
-    data = pd.read_csv(os.getcwd() + '/StockData/' + filename,
-                       names=['Time','Value'],
-                       header=None)
-
-def animate(interval,filename='livepricesAMD.csv'):
-    with open(os.path.join(os.getcwd()+"/StockData",filename),'r') as f:
-        data = f.readlines()
-    times = []
-    values = []
-    for line in data:
-        if len(line) > 1:
-            x,y = line.split(',')
-            times.append(x)
-            values.append(y)
+def animate(i,x_list,y_list,ticker):
+    p,t = getLivePrice(ticker)
+    write_to_csv(t,p,ticker)
+    x_list.append(t)
+    y_list.append(p)
+    # Limiting lists to 10 items or else the graph becomes unreadable
+    y_list = y_list[-10:]
+    x_list = x_list[-10:]
+    # Formatting the graph
     graph.clear()
-    graph.plot(times,values)
-
-
-
-
+    graph.plot(x_list,y_list)
+    plt.xticks(rotation=45, ha='right')
+    plt.title('{0} Stock Price'.format(ticker))
+    plt.ylabel('Price')
 
 
 if __name__ == "__main__":
-
-    style.use('fivethirtyeight')
+    ticker = 'AMD'
+    plt.style.use('dark_background')
 
     fig = plt.figure()
     graph = fig.add_subplot(1,1,1)
-
-    idk = animation.FuncAnimation(fig,animate,interval=1000)
-
+    times = []
+    prices = []
+    idk = animation.FuncAnimation(fig,animate,fargs=(times,prices,ticker),interval=3000)
     plt.show()
 
-
-
-    # makegraph('livepricesAMD.csv')
 
 
 
