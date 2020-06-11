@@ -22,15 +22,23 @@ class TopStocks:
         website = BeautifulSoup(self.response.content,'html.parser')
         all_stocks = website.find_all('table',class_ = 't-home-table')[0]
         for line in all_stocks.find_all('tr'):
-            self._up.append(line.find('td').text)
-        # First element is the word 'TICKER', therefore must be removed
+            stock_info = []
+            mini_array = line.find_all('td')
+            for i in range(4):
+                stock_info.append(mini_array[i].text)
+            self._up.append(stock_info)
+
         self._up.pop(0)
 
-    def ScapeDown(self):
+    def ScrapeDown(self):
         website = BeautifulSoup(self.response.content, 'html.parser')
         all_stocks = website.find_all('table', class_='t-home-table')[1]
         for line in all_stocks.find_all('tr'):
-            self._down.append(line.find('td').text)
+            stock_info = []
+            mini_array = line.find_all('td')
+            for i in range(4):
+                stock_info.append(mini_array[i].text)
+            self._down.append(stock_info)
         # First element is the word 'TICKER', therefore must be removed
         self._down.pop(0)
     # Getter
@@ -47,7 +55,7 @@ class TopStocks:
 if __name__ == "__main__":
     top = TopStocks()
     top.ScrapeTop()
-    top.ScapeDown()
+    top.ScrapeDown()
 
     print(top.getTop())
     print(top.getDown())
