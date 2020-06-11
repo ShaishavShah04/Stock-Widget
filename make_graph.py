@@ -17,7 +17,7 @@ def animate(i,x_list,y_list,ticker):
     p,t = getLivePrice(ticker)
     write_to_csv(t,p,ticker)
     x_list.append(t)
-    y_list.append(p)
+    y_list.append(float(p)) # It took me 3 hours to figure out why this wasn't working. My data was a string instead of a float
     # Limiting lists to 10 items or else the graph becomes unreadable
     y_list = y_list[-10:]
     x_list = x_list[-10:]
@@ -32,7 +32,6 @@ def animate(i,x_list,y_list,ticker):
 if __name__ == "__main__":
     ticker = 'AMD'
     plt.style.use('dark_background')
-
     fig = plt.figure()
     graph = fig.add_subplot(1,1,1)
     times = []
