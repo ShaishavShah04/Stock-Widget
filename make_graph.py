@@ -12,7 +12,6 @@ from live_prices import *
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-
 def animate(i,x_list,y_list,ticker):
     p,t = getLivePrice(ticker)
     write_to_csv(t,p,ticker)
@@ -36,7 +35,7 @@ if __name__ == "__main__":
     graph = fig.add_subplot(1,1,1)
     times = []
     prices = []
-    idk = animation.FuncAnimation(fig,animate,fargs=(times,prices,ticker),interval=3000)
+    ani = animation.FuncAnimation(fig,animate,fargs=(times,prices,ticker),interval=3000)
     plt.show()
 
 

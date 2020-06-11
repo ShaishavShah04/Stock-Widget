@@ -1,32 +1,36 @@
 """
-Working with GUI and messing around cuz why not
+Copy of palaash's GUI since its better. I will continue to work on it tho
 """
+
 from tkinter import *
 
-# Creating main window
 window = Tk()
-window.minsize(1028,720)
-window.resizable(False,False)
-window.title('Stock Tracker')
-window.configure(background = "grey")
+window.minsize(1028, 720)
+window.title("Stock App")
+window.configure(background = "black")
 
-# Trying to create search bar
-searchframe = Frame(window,height=70,width=500,pady=3,padx=3)
-searchframe.grid(row=0 ,columnspan=3)
-
-#searchframe.pack(side=LEFT)
-label_ticker = Label(searchframe,text="ENTER TICKER: ")
-#label_ticker.grid(rowspan=2,column=2)
-label_ticker.pack(side=LEFT,fill=BOTH,expand=True,pady=30)
-
-searchbar = Entry(searchframe,bg="#978E8E")
-#searchbar.grid(rowspan =2,column=9)
-searchbar.pack(side=LEFT,fill=BOTH,expand=True)
-
-searchbutton = Button(searchframe,text = "SEARCH",bg = 'green',fg='white')
-searchbutton.pack(side = LEFT, expand = True, fill = BOTH)
+# common variables
+searchBarBackground = 'gray12'
+searchBarForeground = 'white'
 
 
-# Running it
+# Search bar Stuff
+#
+def submitClick():
+    ticker = searchBar.get()
+    print(ticker)
+#
+searchBarFrame = Frame(window, height = 55, width = 600, pady = 5, padx = 5, bg=searchBarBackground)
+searchBarFrame.grid(row=0, columnspan=3)
+
+tickerLabel = Label(searchBarFrame, text="Enter Ticker: ", font=('Helvetica', '12', 'bold'), bg=searchBarBackground, fg=searchBarForeground)
+tickerLabel.pack(side=LEFT, fill=BOTH, expand=True, pady=5, padx=20)
+
+searchBar = Entry(searchBarFrame, bg='gray22', width=45, fg=searchBarForeground, font=('Helvetica', '12', 'bold'), borderwidth=0)
+searchBar.pack(side=LEFT, expand=True, fill=BOTH)
+
+searchButton = Button(searchBarFrame, command=submitClick, bg='gray16', fg=searchBarForeground, text='Search', font=('Helvetica', '12', 'bold'), borderwidth=0, width=10)
+searchButton.pack(side=LEFT, expand=True, fill=BOTH)
+
 window.mainloop()
 

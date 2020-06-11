@@ -7,7 +7,6 @@ date created: 2020-06-10
 from bs4 import BeautifulSoup
 import requests
 from datetime import datetime
-import os, os.path,csv
 
 
 def webScrapeURL(url):

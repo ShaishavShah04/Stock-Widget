@@ -9,9 +9,7 @@ Modules Required:
 
 
 import os, os.path,csv
-from os import path
 from datetime import datetime
-import pandas as pd
 from bs4 import BeautifulSoup
 import requests
 
@@ -30,7 +28,7 @@ def getLivePrice(ticker): # Getting the live prices
 
 
 
-def write_to_csv(value1, value2,ticker):
+def write_to_csv(value1, value2, ticker):
     # making directory to store Stock Data
     if not os.path.exists('StockData'):
         os.mkdir('StockData')
