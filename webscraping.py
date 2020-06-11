@@ -66,15 +66,18 @@ def getStockInfo(page): # returns stock name, full stock name, index, price, cha
     tdTag = markCapText.parent
     markCap = tdTag.findNext('td').text
 
+    # code in case we need to use finviz website for price
+    '''
     priceText = page.find(text='Price') # find price
     tdTag = priceText.parent
     price = tdTag.findNext('td').text
+    '''
 
     changeText = page.find(text='Change') # find change
     tdTag = changeText.parent
     change = tdTag.findNext('td').text
 
-    return stockName, title, index, price, change, markCap
+    return stockName, title, index, change, markCap
 
 if __name__ == '__main__':
     applePage = webScrapeURL("https://finviz.com/quote.ashx?t=AMZN")
