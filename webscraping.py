@@ -25,7 +25,7 @@ def getLivePrice(page): # Getting the live prices and a time
     return price,time
 
 
-def ScrapeTop(page):
+def ScrapeTop(page): # returns ticker, last, change, volume
     #website = BeautifulSoup(self.response.content, 'html.parser')
     array = []
     all_stocks = page.find_all('table', class_='t-home-table')[0]
