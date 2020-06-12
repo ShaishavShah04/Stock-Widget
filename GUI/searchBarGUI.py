@@ -25,6 +25,10 @@ class SearchBarGUI:
     def submitClick(self):
         self.enteredTicker = self.searchBar.get()
 
+    #Getter
+    def getTicker(self):
+        return self.enteredTicker
+
 
 if __name__ == "__main__":
     from GUI import windowGUI

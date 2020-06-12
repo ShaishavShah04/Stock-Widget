@@ -15,9 +15,7 @@ searchBarForeground = 'white'
 
 
 # Search bar Stuff
-#
 
-#
 searchBarFrame = Frame(window, height = 55, width = 600, pady = 5, padx = 5, bg=searchBarBackground)
 searchBarFrame.grid(row=0, columnspan=3)
 

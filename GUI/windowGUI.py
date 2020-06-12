@@ -18,8 +18,10 @@ class Window:
         self.window.configure(bg="black")
         self.window.resizable(False, False)
 
-        searchBar = searchBarGUI.SearchBarGUI(self.window)
-        topStocks = topStocksGUI.TopStocksGUI(self.window)
+        self.searchBar = searchBarGUI.SearchBarGUI(self.window)
+        self.topStocks = topStocksGUI.TopStocksGUI(self.window)
+        self.graph =  graphGUI.GraphGUI(self.window)
+
 
     # Accessor Methods #
     def getWindow(self):

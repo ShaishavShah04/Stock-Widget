@@ -6,6 +6,7 @@ What this code does:
 - Directly uses the getliveprice function and plots it.
 - Writing it into the csv is not nessasary, but I am writing it for future use
 
+ - 600 * 400
 
 """
 from live_prices import *
@@ -23,20 +24,29 @@ def animate(i,x_list,y_list,ticker):
     # Formatting the graph
     graph.clear()
     graph.plot(x_list,y_list)
-    # graph.ylim(float(p)-10,float(p)+10)
+    print(len(y_list)%10)
+    if len(y_list) >= 2 and len(y_list)%3 == 0: # Making the graph readable
+        difference = abs(y_list[-1] - y_list[-2])
+        print(difference)
+        if difference != 0:
+            difference *= 15
+            plt.ylim(float(p)-difference,float(p)+difference)
+
     plt.xticks(rotation=45, ha='right')
     plt.title('{0} Stock Price'.format(ticker))
     plt.ylabel('Price')
 
 
 if __name__ == "__main__":
-    ticker = 'AMD'
+    ticker = 'AAPL'
     plt.style.use('dark_background')
     fig = plt.figure()
+    fig.patch.set_facecolor('#0F0F0F')
     graph = fig.add_subplot(1,1,1)
+    graph.set_facecolor('#0F0F0F')
     times = []
     prices = []
-    ani = animation.FuncAnimation(fig,animate,fargs=(times,prices,ticker),interval=3000)
+    ani = animation.FuncAnimation(fig,animate,fargs=(times,prices,ticker),interval=1500)
     plt.show()
 
 
