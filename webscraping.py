@@ -90,6 +90,6 @@ if __name__ == '__main__':
     #getStockInfo(applePage)
     page = webScrapeURL("https://finviz.com/")
     print(ScrapeTop(page))
-
+    print(ScrapeDown(page))
 
 

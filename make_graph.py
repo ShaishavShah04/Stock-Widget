@@ -23,6 +23,7 @@ def animate(i,x_list,y_list,ticker):
     # Formatting the graph
     graph.clear()
     graph.plot(x_list,y_list)
+    # graph.ylim(float(p)-10,float(p)+10)
     plt.xticks(rotation=45, ha='right')
     plt.title('{0} Stock Price'.format(ticker))
     plt.ylabel('Price')

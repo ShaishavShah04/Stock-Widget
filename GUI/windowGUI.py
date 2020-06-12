@@ -7,6 +7,8 @@ date created: 2020-06-11
 from tkinter import *
 from GUI import topStocksGUI
 from GUI import searchBarGUI
+from GUI import graphGUI
+
 
 class Window:
     def __init__(self):
@@ -25,5 +27,5 @@ class Window:
 
 if __name__ == "__main__":
     window = Window()
-    window.window.mainloop()
+    window.getWindow().mainloop()
 
