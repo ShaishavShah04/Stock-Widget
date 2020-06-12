@@ -15,10 +15,10 @@ class SearchBarGUI:
 
         # Label, Input, And Submit
         self.tickerLabel = Label(self.searchBarFrame, text="Enter Ticker: ", font=('Helvetica', '12', 'bold'),bg=self.searchBarBackground, fg=self.searchBarForeground)
-        self.tickerLabel.pack(side=LEFT, fill=BOTH, expand=True, pady=5, padx=20)
+        self.tickerLabel.pack(side=LEFT, fill=BOTH, expand=False, pady=5, padx=20)
         self.searchBar = Entry(self.searchBarFrame, bg='gray22', width=45, fg=self.searchBarForeground,font=('Helvetica', '12', 'bold'), borderwidth=0)
         self.searchBar.pack(side=LEFT, expand=True, fill=BOTH)
-        self.searchButton = Button(self.searchBarFrame, command=self.submitClick, bg='gray16', fg=self.searchBarForeground, text='Search',font=('Helvetica', '12', 'bold'), borderwidth=0, width=10)
+        self.searchButton = Button(self.searchBarFrame, command=self.submitClick, bg='gray16', fg=self.searchBarForeground, text='Search',font=('Helvetica', '12', 'bold'), borderwidth=0, width=15)
         self.searchButton.pack(side=LEFT, expand=True, fill=BOTH)
 
     # Submit button:
