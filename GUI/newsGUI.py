@@ -17,7 +17,7 @@ class NewsfeedGUI:
         self.foregroundColor = 'white'
 
         self.newsFrame = Frame(window, height=374, width=425, bg=self.backgroundColor)
-        self.newsFrame.grid(row=2, column=8)
+        self.newsFrame.grid(row=3, column=8, rowspan=3, sticky='s')
 
         self.titleLabel = Label(self.newsFrame, text="LATEST NEWS", font=('Helvetica', '12', 'bold'), bg=self.backgroundColor, fg=self.foregroundColor, padx=10, pady=10.5)
         self.titleLabel.grid(columnspan=8, sticky='news')

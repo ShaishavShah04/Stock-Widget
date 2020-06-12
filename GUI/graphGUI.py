@@ -15,12 +15,12 @@ import matplotlib.animation as animation
 class GraphGUI:
     def __init__(self,window):
         self.bg = 'snow'
-        self.GraphFrame = Frame(window,height=300,width=700, bg = self.bg)
-        self.GraphFrame.grid(row=1,column=1,columnspan=5,sticky=S)
+        self.GraphFrame = Frame(window,height=800,width=700, bg = self.bg)
+        self.GraphFrame.grid(row=1,column=1, rowspan=3, sticky=S)
         self.ticker = None
         self.font = ('Helvetica', '12', 'bold')
         #
-        fig = Figure(figsize=(7,3), dpi=100)
+        fig = Figure(figsize=(7,4), dpi=100)
         graph = fig.add_subplot(1,1,1)
         graph.plot([1,2,3,4,5,6],[1,4,9,16,25,36])
         #

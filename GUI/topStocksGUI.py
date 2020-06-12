@@ -26,7 +26,7 @@ class TopStocksGUI:
         self.foregroundColor = 'white'
 
         self.topStockFrame = Frame(window, height=346, width=425, bg = self.backgroundColor)
-        self.topStockFrame.grid(row=1, column=8)
+        self.topStockFrame.grid(row=1, column=8, rowspan=2, sticky='n')
 
         self.column = 0
         self.row = 1
