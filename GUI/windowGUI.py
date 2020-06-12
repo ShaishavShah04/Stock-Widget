@@ -6,6 +6,7 @@ date created: 2020-06-11
 
 from tkinter import *
 from GUI import topStocksGUI
+from GUI import searchBarGUI
 
 class Window:
     def __init__(self):
@@ -15,6 +16,7 @@ class Window:
         self.window.configure(bg="black")
         self.window.resizable(False, False)
 
+        searchBar = searchBarGUI.SearchBarGUI(self.window)
         topStocks = topStocksGUI.TopStocksGUI(self.window)
 
     # Accessor Methods #
