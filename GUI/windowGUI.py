@@ -8,6 +8,7 @@ from tkinter import *
 from GUI import topStocksGUI
 from GUI import searchBarGUI
 from GUI import graphGUI
+from GUI import newsGUI
 
 
 class Window:
@@ -21,7 +22,7 @@ class Window:
         self.searchBar = searchBarGUI.SearchBarGUI(self.window)
         self.topStocks = topStocksGUI.TopStocksGUI(self.window)
         self.graph =  graphGUI.GraphGUI(self.window)
-
+        self.newsfeed = newsGUI.NewsfeedGUI(self.window, 'AAPL')
 
     # Accessor Methods #
     def getWindow(self):
