@@ -31,22 +31,22 @@ class Window:
             # Colors
         rcParams['axes.labelcolor'] = 'white'
         rcParams['xtick.color'] = 'white'
+        rcParams['axes.titleweight'] = "bold"
+        rcParams['axes.titlecolor'] = 'white'
         rcParams['ytick.color'] = 'white'
             # Configs
-        self.fig = Figure(figsize=(7, 3), dpi=100)
+        self.fig = plt.figure(figsize=(7, 3), dpi=100)
         self.fig.patch.set_facecolor("#1c1c1c")
         self.graph = self.fig.add_subplot(1, 1, 1)
         self.graph.set_facecolor('#454444')
+            # Gui
         self.graphGUI =  graphGUI.GraphGUI(self.window,self.fig,self.graph)
-        plt.xticks(rotation=45, ha='right')
-        plt.title('{0} Stock Price'.format(self.graphGUI.ticker))
-        plt.ylabel('Price')
-
         # News
         self.newsfeed = newsGUI.NewsfeedGUI(self.window, 'AAPL')
 
     # Modify Methods #
-
+    def createGraphVars(self):
+        pass
 
     # Accessor Methods #
     def getWindow(self):
@@ -54,10 +54,10 @@ class Window:
     def getGraphClass(self):
         return self.graphGUI
 
+
+
 if __name__ == "__main__":
     ## Static Data
-
-    ##
     window = Window()
     # Animate
     ani = animation.FuncAnimation(window.fig,window.getGraphClass().animate,fargs=(window.getGraphClass().times, window.getGraphClass().values,window.getGraphClass().ticker ),interval=2000)

@@ -18,8 +18,11 @@ class GraphGUI:
         self.GraphFrame = Frame(window,height=300,width=700, bg = self.bg)
         self.GraphFrame.grid(row=1,column=1, rowspan=3, sticky=S)
         self.ticker = 'AMD'
-        self.font = ('Helvetica', '12', 'bold')
         self.hfont = {'fontname':'Helvetica'}
+        self.TitleBackground = 'gray12'
+        self.TitleForeground = 'white'
+        #self.Title = Label(self.GraphFrame,text="{0} Price".format(self.ticker),font=self.font,bg=self.TitleBackground, fg=self.TitleForeground)
+        #self.Title.grid(row=2,column=1,rowspan=3,sticky=S)
         self.times = []
         self.values = []
         self.fig = fig
@@ -58,9 +61,9 @@ class GraphGUI:
                 difference *= 15
                 plt.ylim(float(p) - difference, float(p) + difference)
 
-        #plt.xticks(rotation=45, ha='right')
-        #plt.title('{0} Stock Price'.format(ticker),**self.hfont)
-        #plt.ylabel('Price',**self.hfont)
+        plt.xticks(rotation=20, ha='right')
+        plt.title('{0} Stock Price'.format(ticker))
+        plt.ylabel('Price')
 
     def changeTicker(self,ticker):
         self.ticker = ticker
