@@ -33,8 +33,10 @@ class Engine:
         rcParams['axes.labelcolor'] = 'white'
         rcParams['xtick.color'] = 'white'
         rcParams['axes.titleweight'] = "bold"
-        rcParams['axes.titlecolor'] = 'white'
         rcParams['ytick.color'] = 'white'
+        rcParams['text.color'] = 'white'
+
+
             # Configs
         self.fig = plt.figure(figsize=(7, 3), dpi=100)
         self.fig.patch.set_facecolor("#1c1c1c")
