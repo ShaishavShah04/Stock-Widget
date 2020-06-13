@@ -15,7 +15,7 @@ from matplotlib import rcParams
 import matplotlib.pyplot as plt
 
 
-class Window:
+class Engine:
     def __init__(self):
         self.window = Tk()
         self.window.minsize(1028, 720)
@@ -58,7 +58,7 @@ class Window:
 
 if __name__ == "__main__":
     ## Static Data
-    window = Window()
+    window = Engine()
     # Animate
     ani = animation.FuncAnimation(window.fig,window.getGraphClass().animate,fargs=(window.getGraphClass().times, window.getGraphClass().values,window.getGraphClass().ticker ),interval=2000)
     window.getWindow().mainloop()
