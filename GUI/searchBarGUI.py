@@ -36,6 +36,6 @@ class SearchBarGUI:
 
 if __name__ == "__main__":
     from GUI import engineGUI
-    window = engineGUI.Window()
+    window = engineGUI.Engine()
     search = SearchBarGUI(window.window)
     window.window.mainloop()

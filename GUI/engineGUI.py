@@ -58,7 +58,7 @@ class Engine:
 
 if __name__ == "__main__":
     ## Static Data
-    window = Window()
+    window = Engine()
     # Animate
     ani = animation.FuncAnimation(window.fig,window.getGraphClass().animate,fargs=(window.getGraphClass().times, window.getGraphClass().values,window.getGraphClass().ticker ),interval=2000)
     window.getWindow().mainloop()

@@ -89,6 +89,6 @@ class TopStocksGUI:
         return self.stocks
 
 if __name__ == "__main__":
-    window = engineGUI.Window()
+    window = engineGUI.Engine()
     topStocks = TopStocksGUI(window.window)
     window.window.mainloop()
