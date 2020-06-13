@@ -21,6 +21,7 @@ def getLivePrice(ticker): # Getting the live prices
     url = 'https://ca.finance.yahoo.com/quote/{0}'.format(ticker) # The url used
     response = requests.get(url) # Using requests module to get the content
     yahoo_price_html = BeautifulSoup(response.content,'html.parser') # Converting content into html code
+    # print(yahoo_price_html)
     tag_with_price_and_time = yahoo_price_html.find_all(class_ = 'My(6px) Pos(r) smartphone_Mt(6px)')[0] # This is the class I need to search through, obtained through inspect element in chrome
     price = tag_with_price_and_time.find_all('span')[0].text # Price is in the 1st span element, therefore this works
     time = datetime.now().strftime("%M:%S")

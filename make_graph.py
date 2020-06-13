@@ -13,7 +13,7 @@ from live_prices import *
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-def animate(i,x_list,y_list,ticker):
+def animate2(i,x_list,y_list,ticker):
     p,t = getLivePrice(ticker)
     write_to_csv(t,p,ticker)
     x_list.append(t)
@@ -39,9 +39,8 @@ def animate(i,x_list,y_list,ticker):
 
 if __name__ == "__main__":
     ticker = 'AAPL'
-    plt.style.use('dark_background')
     fig = plt.figure()
-    fig.patch.set_facecolor('#0F0F0F')
+    fig.patch.set_facecolor('#ff0000')
     graph = fig.add_subplot(1,1,1)
     graph.set_facecolor('#0F0F0F')
     times = []
