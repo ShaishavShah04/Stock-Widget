@@ -15,7 +15,7 @@ from matplotlib import rcParams
 import matplotlib.pyplot as plt
 
 
-class Window:
+class Engine:
     def __init__(self):
         self.window = Tk()
         self.window.minsize(1028, 720)
