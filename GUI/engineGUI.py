@@ -29,6 +29,7 @@ class Engine:
 
         # Graph -- Much of the graph config has to be done here since the variables have to be accessed in this file.
             # Colors
+
         rcParams['axes.labelcolor'] = 'white'
         rcParams['xtick.color'] = 'white'
         rcParams['axes.titleweight'] = "bold"
