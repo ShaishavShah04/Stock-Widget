@@ -6,7 +6,7 @@ date created: 2020-06-11
 
 from tkinter import *
 from webscraping import ScrapeTop, ScrapeDown, webScrapeURL
-from GUI import windowGUI
+from GUI import engineGUI
 
 class TopStocksGUI:
 
@@ -89,6 +89,6 @@ class TopStocksGUI:
         return self.stocks
 
 if __name__ == "__main__":
-    window = windowGUI.Window()
+    window = engineGUI.Engine()
     topStocks = TopStocksGUI(window.window)
     window.window.mainloop()
