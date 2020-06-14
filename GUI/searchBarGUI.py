@@ -5,7 +5,7 @@ class SearchBarGUI:
         self.searchBarBackground = 'gray12'
         self.searchBarForeground = 'white'
 
-        self.enteredTicker = 'AMD'
+        self.enteredTicker = 'SPY'
 
         # Frame
         self.searchBarFrame = Frame(window, height = 55, width = 600, pady = 5, bg=self.searchBarBackground)
@@ -27,7 +27,7 @@ class SearchBarGUI:
     # Submit button:
     def submitClick(self):
         self.enteredTicker = (self.searchBar.get()).upper()
-        print(self.enteredTicker)
+        return self.enteredTicker
 
     #Getter
     def getTicker(self):

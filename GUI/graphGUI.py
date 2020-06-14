@@ -17,7 +17,7 @@ class GraphGUI:
         self.bg = 'gray22'
         self.GraphFrame = Frame(window,height=300,width=700, bg = self.bg)
         self.GraphFrame.grid(row=1,column=1, rowspan=3, sticky=S)
-        self.ticker = 'AMD'
+        self.ticker = 'SPY'
         self.hfont = {'fontname':'Helvetica'}
         self.TitleBackground = 'gray12'
         self.TitleForeground = 'white'
@@ -28,8 +28,6 @@ class GraphGUI:
         self.fig = fig
         self.graph = graph
 
-        # graph.plot([1,2,3,4,5,6],[1,4,9,16,25,36])
-        #
         canvas = FigureCanvasTkAgg(self.fig,self.GraphFrame)
         canvas.draw()
         canvas.get_tk_widget().grid(row=1,column=1)
@@ -56,13 +54,12 @@ class GraphGUI:
         self.graph.plot(x_list, y_list,'y-')
         if len(y_list) >= 2 and len(y_list) % 3 == 0:  # Making the graph readable
             difference = abs(y_list[-1] - y_list[-2])
-            print(difference)
             if difference != 0:
                 difference *= 15
                 plt.ylim(float(p) - difference, float(p) + difference)
 
         plt.xticks(rotation=20, ha='right')
-        plt.title('{0} Stock Price'.format(ticker))
+        plt.title('{0} Stock Price - Last Price: {1}'.format(ticker,str(p)))
         plt.ylabel('Price')
 
     def changeTicker(self,ticker):
