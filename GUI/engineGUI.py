@@ -9,10 +9,12 @@ from GUI import topStocksGUI
 from GUI import searchBarGUI
 from GUI import graphGUI
 from GUI import newsGUI
+from GUI import stockinfo
 from matplotlib.figure import Figure
 import matplotlib.animation as animation
 from matplotlib import rcParams
 import matplotlib.pyplot as plt
+from webscraping import *
 
 
 class Engine:
@@ -36,16 +38,28 @@ class Engine:
         rcParams['ytick.color'] = 'white'
         rcParams['text.color'] = 'white'
 
+        # Stock info
+        self.stockTicker = 'AAPL' ### TO BE CHANGED LATER
+        self.urlFinviz = "https://finviz.com/quote.ashx?t={0}".format(self.stockTicker) # URL FOR FINVIZ
+        self.urlYahoo = 'https://ca.finance.yahoo.com/quote/{0}'.format(self.stockTicker) # URL FOR YAHOO FINANCE
+
+        self.pageFinviz = webScrapeURL(self.urlFinviz)
+        self.pageYahoo= webScrapeURL(self.urlYahoo)
 
             # Configs
         self.fig = plt.figure(figsize=(7, 3), dpi=100)
         self.fig.patch.set_facecolor("#1c1c1c")
         self.graph = self.fig.add_subplot(1, 1, 1)
         self.graph.set_facecolor('#454444')
+
             # Gui
         self.graphGUI =  graphGUI.GraphGUI(self.window,self.fig,self.graph)
+
         # News
-        self.newsfeed = newsGUI.NewsfeedGUI(self.window, 'AAPL')
+        self.newsfeed = newsGUI.NewsfeedGUI(self.window, self.pageFinviz)
+
+        # Stock info GUI
+        self.stockInfo = stockinfo.StockInfo(self.window, self.pageFinviz)
 
     # Modify Methods #
     def createGraphVars(self):
