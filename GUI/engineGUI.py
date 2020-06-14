@@ -24,8 +24,13 @@ class Engine:
         self.window.title("Stock Trader")
         self.window.configure(bg="#1c1c1c")
         self.window.resizable(False, False)
+        self.currentTicker = 'SPY'
+        #
+
         # Search
         self.searchBar = searchBarGUI.SearchBarGUI(self.window)
+            # Checking for updates
+
         # Top Stocks
         self.topStocks = topStocksGUI.TopStocksGUI(self.window)
 
@@ -56,6 +61,7 @@ class Engine:
         self.graphGUI =  graphGUI.GraphGUI(self.window,self.fig,self.graph)
 
         # News
+        self.newsfeed = newsGUI.NewsfeedGUI(self.window, self.currentTicker)
         self.newsfeed = newsGUI.NewsfeedGUI(self.window, self.pageFinviz)
 
         # Stock info GUI
@@ -65,18 +71,24 @@ class Engine:
     def createGraphVars(self):
         pass
 
+    def changeTicker(self,ticker):
+        self.currentTicker = ticker
+        self.graphGUI.ticker = ticker
+
     # Accessor Methods #
     def getWindow(self):
         return self.window
     def getGraphClass(self):
         return self.graphGUI
-
+    def getTicker(self):
+        return self.currentTicker
 
 
 if __name__ == "__main__":
     ## Static Data
     window = Engine()
+    # Check for change in searchbar
     # Animate
-    ani = animation.FuncAnimation(window.fig,window.getGraphClass().animate,fargs=(window.getGraphClass().times, window.getGraphClass().values,window.getGraphClass().ticker ),interval=2000)
-    window.getWindow().mainloop()
+    ani = animation.FuncAnimation(window.fig,window.getGraphClass().animate,fargs=(window.getGraphClass().times, window.getGraphClass().values,window.currentTicker),interval=2000)
+    window.window.mainloop()
 
