@@ -41,7 +41,7 @@ class GraphGUI:
         """ # For an interactive graph but its very buggy so am not using it
 
     def animate(self,i, x_list, y_list,ticker):
-
+        # print(ticker)
         p, t = getLivePrice(ticker)
         write_to_csv(t, p, ticker)
         x_list.append(t)

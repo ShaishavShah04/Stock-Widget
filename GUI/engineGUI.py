@@ -9,7 +9,6 @@ from GUI import topStocksGUI
 from GUI import searchBarGUI
 from GUI import graphGUI
 from GUI import newsGUI
-from matplotlib.figure import Figure
 import matplotlib.animation as animation
 from matplotlib import rcParams
 import matplotlib.pyplot as plt
@@ -23,7 +22,6 @@ class Engine:
         self.window.configure(bg="#1c1c1c")
         self.window.resizable(False, False)
         self.currentTicker = 'SPY'
-
         #
 
         # Search
@@ -42,7 +40,6 @@ class Engine:
         rcParams['ytick.color'] = 'white'
         rcParams['text.color'] = 'white'
 
-
             # Configs
         self.fig = plt.figure(figsize=(7, 3), dpi=100)
         self.fig.patch.set_facecolor("#1c1c1c")
@@ -51,7 +48,7 @@ class Engine:
             # Gui
         self.graphGUI =  graphGUI.GraphGUI(self.window,self.fig,self.graph)
         # News
-        self.newsfeed = newsGUI.NewsfeedGUI(self.window, 'AAPL')
+        self.newsfeed = newsGUI.NewsfeedGUI(self.window, self.currentTicker)
 
     # Modify Methods #
     def createGraphVars(self):
