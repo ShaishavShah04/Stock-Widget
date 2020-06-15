@@ -1,7 +1,7 @@
 from tkinter import *
 
 class SearchBarGUI:
-    def __init__(self, window):
+    def __init__(self, window,engine):
         self.searchBarBackground = 'gray12'
         self.searchBarForeground = 'white'
 
@@ -23,19 +23,18 @@ class SearchBarGUI:
         self.searchButton = Button(self.searchBarFrame, command=self.submitClick, bg='gray16', fg=self.searchBarForeground, text='Search',font=('Helvetica', '12', 'bold'), borderwidth=0, width=15)
         self.searchButton.grid(row=1, column=5, sticky='news')
         self.searchButton.grid_propagate(0)
+        # Engine Shadow
+        self.engine = engine
 
     # Submit button:
     def submitClick(self):
         self.enteredTicker = (self.searchBar.get()).upper()
-        return self.enteredTicker
+        self.engine.currentTicker = self.enteredTicker
+        self.engine.changed = True
+        self.engine.getGraphClass().values = []
+        self.engine.getGraphClass().times = []
+        self.searchBar.delete(0,END)
 
     #Getter
     def getTicker(self):
         return self.enteredTicker
-
-
-if __name__ == "__main__":
-    from GUI import engineGUI
-    window = engineGUI.Engine()
-    search = SearchBarGUI(window.window)
-    window.window.mainloop()

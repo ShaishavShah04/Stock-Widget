@@ -40,8 +40,9 @@ class GraphGUI:
         canvas._tkcanvas.pack(side=TOP,fill=BOTH,expand=False)
         """ # For an interactive graph but its very buggy so am not using it
 
-    def animate(self,i, x_list, y_list,ticker):
-        # print(ticker)
+    def animate(self,i, x_list, y_list,ticker,window):
+        print(window.changed) # Debugging
+        print(x_list,y_list) # Debugging
         p, t = getLivePrice(ticker)
         write_to_csv(t, p, ticker)
         x_list.append(t)
@@ -57,10 +58,16 @@ class GraphGUI:
             if difference != 0:
                 difference *= 15
                 plt.ylim(float(p) - difference, float(p) + difference)
+        elif window.changed:
+            plt.ylim(float(p)-(float(p)*0.1),float(p)+(float(p)*0.1))
 
         plt.xticks(rotation=20, ha='right')
         plt.title('{0} Stock Price - Last Price: {1}'.format(ticker,str(p)))
         plt.ylabel('Price')
+
+        if window.changed:
+            window.changed = False
+
 
     def changeTicker(self,ticker):
         self.ticker = ticker

@@ -22,10 +22,11 @@ class Engine:
         self.window.configure(bg="#1c1c1c")
         self.window.resizable(False, False)
         self.currentTicker = 'SPY'
+        self.changed = False
         #
 
         # Search
-        self.searchBar = searchBarGUI.SearchBarGUI(self.window)
+        self.searchBar = searchBarGUI.SearchBarGUI(self.window,self)
             # Checking for updates
 
         # Top Stocks
@@ -68,10 +69,20 @@ class Engine:
 
 
 if __name__ == "__main__":
-    ## Static Data
+    #
+    on = True
+    def updateOn():
+        global on
+        on = False
+    #
     window = Engine()
-    # Check for change in searchbar
     # Animate
-    ani = animation.FuncAnimation(window.fig,window.getGraphClass().animate,fargs=(window.getGraphClass().times, window.getGraphClass().values,window.currentTicker),interval=2000)
-    window.window.mainloop()
+    ani = animation.FuncAnimation(window.fig,window.getGraphClass().animate,fargs=(window.getGraphClass().times, window.getGraphClass().values,window.getTicker(),window),interval=2000,cache_frame_data=False)
+    # Running it
+    window.getWindow().protocol('WM_DELETE_WINDOW',updateOn)
+    while on:
+        window.window.update_idletasks()
+        window.window.update()
+        if window.changed:
+            ani.__init__(window.fig,window.getGraphClass().animate,fargs=(window.getGraphClass().times, window.getGraphClass().values,window.getTicker(),window),interval=2000,cache_frame_data=False)
 
