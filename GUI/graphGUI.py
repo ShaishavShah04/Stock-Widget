@@ -4,7 +4,7 @@ Trying to create a graph GUI
 """
 from tkinter import *
 import matplotlib
-from live_prices import *
+from live_prices import write_to_csv, getLivePrice
 matplotlib.use("TkAgg") # Backend of Matplotlib
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 import matplotlib.pyplot as plt

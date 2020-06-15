@@ -44,14 +44,6 @@ class Engine:
         rcParams['ytick.color'] = 'white'
         rcParams['text.color'] = 'white'
 
-        # Stock info
-        self.stockTicker = 'AAPL' ### TO BE CHANGED LATER
-        self.urlFinviz = "https://finviz.com/quote.ashx?t={0}".format(self.stockTicker) # URL FOR FINVIZ
-        self.urlYahoo = 'https://ca.finance.yahoo.com/quote/{0}'.format(self.stockTicker) # URL FOR YAHOO FINANCE
-
-        self.pageFinviz = webScrapeURL(self.urlFinviz)
-        self.pageYahoo= webScrapeURL(self.urlYahoo)
-
             # Configs
         self.fig = plt.figure(figsize=(7, 3), dpi=100)
         self.fig.patch.set_facecolor("#1c1c1c")
@@ -61,8 +53,14 @@ class Engine:
             # Gui
         self.graphGUI =  graphGUI.GraphGUI(self.window,self.fig,self.graph)
 
-        # News
-        #self.newsfeed = newsGUI.NewsfeedGUI(self.window, self.currentTicker)
+        # Stock info
+        # self.stockTicker = 'AAPL' ### TO BE CHANGED LATER
+        self.urlFinviz = "https://finviz.com/quote.ashx?t={0}".format(self.currentTicker) # URL FOR FINVIZ
+        self.urlYahoo = 'https://ca.finance.yahoo.com/quote/{0}'.format(self.currentTicker) # URL FOR YAHOO FINANCE
+
+        self.pageFinviz = webScrapeURL(self.urlFinviz)
+        self.pageYahoo= webScrapeURL(self.urlYahoo)
+
         self.newsfeed = newsGUI.NewsfeedGUI(self.window, self.pageFinviz)
 
         # Stock info GUI
@@ -75,6 +73,10 @@ class Engine:
     def changeTicker(self,ticker):
         self.currentTicker = ticker
         self.graphGUI.ticker = ticker
+
+    def updateEverything(self):
+        self.newsfeed.__init__(self.window,webScrapeURL("https://finviz.com/quote.ashx?t={0}".format(self.currentTicker)))
+        self.stockInfo.__init__(self.window,webScrapeURL("https://finviz.com/quote.ashx?t={0}".format(self.currentTicker)))
 
     # Accessor Methods #
     def getWindow(self):
@@ -101,5 +103,6 @@ if __name__ == "__main__":
         window.window.update_idletasks()
         window.window.update()
         if window.changed:
+            window.updateEverything()
             ani.__init__(window.fig,window.getGraphClass().animate,fargs=(window.getGraphClass().times, window.getGraphClass().values,window.getTicker(),window),interval=2000,cache_frame_data=False)
 
