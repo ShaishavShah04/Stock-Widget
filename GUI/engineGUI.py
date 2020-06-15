@@ -62,7 +62,7 @@ class Engine:
         self.graphGUI =  graphGUI.GraphGUI(self.window,self.fig,self.graph)
 
         # News
-        self.newsfeed = newsGUI.NewsfeedGUI(self.window, self.currentTicker)
+        #self.newsfeed = newsGUI.NewsfeedGUI(self.window, self.currentTicker)
         self.newsfeed = newsGUI.NewsfeedGUI(self.window, self.pageFinviz)
 
         # Stock info GUI
