@@ -9,10 +9,8 @@ from tkinter import *
 import webbrowser
 
 class NewsfeedGUI:
-    def __init__(self, window, ticker):
-        self.url = "https://finviz.com/quote.ashx?t={0}".format(ticker)
-        self.page = webScrapeURL(self.url)
-        self.news = getNewsStock(self.page)
+    def __init__(self, window, page):
+        self.news = getNewsStock(page)
 
         self.backgroundColor = 'gray12'
         self.foregroundColor = 'white'
@@ -27,7 +25,7 @@ class NewsfeedGUI:
 
         for i in range(8):
             self.publisherLabel = Label(self.newsFrame, text=self.news[i][1], font=('Helvetica', '7', 'bold'), bg=self.backgroundColor, fg=self.foregroundColor, padx=3, pady=2, wraplength=100, justify=LEFT)
-            self.newsLabel = Label(self.newsFrame, text=self.news[i][0], font=('Helvetica', '9'), bg=self.backgroundColor, fg=self.foregroundColor, padx=2, pady=2, wraplength=325, justify=LEFT, cursor='hand1')
+            self.newsLabel = Label(self.newsFrame, text=self.news[i][0], font=('Helvetica', '9'), bg=self.backgroundColor, fg=self.foregroundColor, padx=2, pady=2, wraplength=315, justify=LEFT, cursor='hand1')
 
             self.newsLabel.bind("<Button-1>", lambda e: self.callback(self.news[i][2]))
 

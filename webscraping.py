@@ -60,9 +60,9 @@ def getNewsStock(page):
     return newsArray
 
 def getStockInfo(page): # returns stock name, full stock name, index, price, change, market cap (IN THAT ORDER)
-    title = page.find('title').text # find full name of stock
-
     stockName = page.find('a', {'id': 'ticker'}).text # find stock name
+    title = page.find('title').text # find full name of stock
+    title = title.replace(stockName + ' ', '') # removes the ticker from the stockname
 
     indexText = page.find(text='Index') # find index
     tdTag = indexText.parent
@@ -86,10 +86,8 @@ def getStockInfo(page): # returns stock name, full stock name, index, price, cha
     return stockName, title, index, change, markCap
 
 if __name__ == '__main__':
-    applePage = webScrapeURL("https://finviz.com/quote.ashx?t=AMZN")
-    #getStockInfo(applePage)
-    page = webScrapeURL("https://finviz.com/")
-    print(ScrapeTop(page))
-    print(ScrapeDown(page))
+    applePage = webScrapeURL("https://finviz.com/quote.ashx?t=AAPL")
+    getStockInfo(applePage)
+
 
 

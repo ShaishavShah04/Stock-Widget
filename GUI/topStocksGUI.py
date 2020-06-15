@@ -9,7 +9,6 @@ from webscraping import ScrapeTop, ScrapeDown, webScrapeURL
 from GUI import engineGUI
 
 class TopStocksGUI:
-
     def __init__(self, window):
         page = webScrapeURL("https://finviz.com/")
 
