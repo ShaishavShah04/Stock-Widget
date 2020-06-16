@@ -28,6 +28,7 @@ class SearchBarGUI:
 
     # Submit button:
     def submitClick(self):
+
         self.enteredTicker = (self.searchBar.get()).upper()
         self.engine.currentTicker = self.enteredTicker
         self.engine.changed = True

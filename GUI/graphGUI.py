@@ -41,9 +41,8 @@ class GraphGUI:
         """ # For an interactive graph but its very buggy so am not using it
 
     def animate(self,i, x_list, y_list,ticker,window):
-        print(window.changed) # Debugging
-        print(x_list,y_list) # Debugging
         p, t = getLivePrice(ticker)
+        p = p.replace(",","")
         write_to_csv(t, p, ticker)
         x_list.append(t)
         y_list.append(float(p))  # It took me 3 hours to figure out why this wasn't working. My data was a string instead of a float
