@@ -47,18 +47,20 @@ class GraphGUI:
         x_list.append(t)
         y_list.append(float(p))  # It took me 3 hours to figure out why this wasn't working. My data was a string instead of a float
         # Limiting lists to 10 items or else the graph becomes unreadable
-        y_list = y_list[-10:]
-        x_list = x_list[-10:]
         # Formatting the graph
         self.graph.clear()
-        self.graph.plot(x_list, y_list,'y-')
-        if len(y_list) >= 2 and len(y_list) % 3 == 0:  # Making the graph readable
-            difference = abs(y_list[-1] - y_list[-2])
-            if difference != 0:
-                difference *= 15
-                plt.ylim(float(p) - difference, float(p) + difference)
-        elif window.changed:
-            plt.ylim(float(p)-(float(p)*0.1),float(p)+(float(p)*0.1))
+        self.graph.plot(x_list[-10:], y_list[-10:],'y-')
+
+        if len(x_list)%5==0:
+            try: # Making the graph readable
+                difference = abs(y_list[-1] - y_list[-2])
+                print(difference)
+                if difference != 0:
+                    difference *= 15
+                    plt.ylim(float(p) - difference, float(p) + difference)
+            except:
+                print('10p')
+                plt.ylim(float(p)-(float(p)*0.1),float(p)+(float(p)*0.1))
 
         plt.xticks(rotation=20, ha='right')
         plt.title('{0} Stock Price - Last Price: {1}'.format(ticker,str(p)))

@@ -1,4 +1,5 @@
 from tkinter import *
+from webscraping import getLivePrice, webScrapeURL
 
 class SearchBarGUI:
     def __init__(self, window,engine):
@@ -28,13 +29,41 @@ class SearchBarGUI:
 
     # Submit button:
     def submitClick(self):
+        try:
+            page = webScrapeURL('https://ca.finance.yahoo.com/quote/{0}'.format((self.searchBar.get()).upper()))
+            t,p = getLivePrice(page)
+            self.enteredTicker = (self.searchBar.get()).upper()
+            self.engine.currentTicker = self.enteredTicker
+            self.engine.changed = True
+            self.engine.getGraphClass().values = []
+            self.engine.getGraphClass().times = []
+            self.searchBar.delete(0, END)
+        except:
+            self.errorMessage()
 
-        self.enteredTicker = (self.searchBar.get()).upper()
-        self.engine.currentTicker = self.enteredTicker
-        self.engine.changed = True
-        self.engine.getGraphClass().values = []
-        self.engine.getGraphClass().times = []
-        self.searchBar.delete(0,END)
+    def errorMessage(self):
+        errorBox = Tk()
+        errorBox.wm_title('You don\'t know stock!')
+        errorBox.minsize(300,100)
+        errorBox.resizable(False,False)
+        errorBox.configure(bg='#1c1c1c')
+        #
+        message = Label(errorBox,text="Stock not found, Sorry!",bg='#1c1c1c',fg='#FFFFFF')
+        message.pack(side='top',fill=X)
+        #
+        b = Button(errorBox,text="I will enter a better stock", command = errorBox.destroy, bg='#1c1c1c',fg='#FFFFFF')
+        b.pack(side='bottom',fill=X)
+
+        on = True
+        def off():
+            global on
+            on = False
+
+        errorBox.protocol('WM_DELETE_WINDOW', off)
+
+        while on:
+            errorBox.update_idletasks()
+            errorBox.update()
 
     #Getter
     def getTicker(self):

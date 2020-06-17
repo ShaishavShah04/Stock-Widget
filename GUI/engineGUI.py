@@ -100,6 +100,7 @@ if __name__ == "__main__":
     # Running it
 
     window.getWindow().protocol('WM_DELETE_WINDOW',updateOn) # To not get Error when window is closed
+
     while on:
         window.window.update_idletasks()
         window.window.update()
