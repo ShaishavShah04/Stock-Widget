@@ -41,6 +41,9 @@ class TopStocksGUI:
         for i in range(10):
             self.makeNewsBar(i)
 
+        for i in range(10):
+            self.topStockFrame.columnconfigure(i, weight=100)
+
         self.topStockFrame.grid_propagate(0)
 
     def change(self,stock):
@@ -51,7 +54,7 @@ class TopStocksGUI:
 
     def makeNewsBar(self,i):
         self.label = Label(self.topStockFrame, text=self.stocks[i][0], font=('Helvetica', '10', 'bold'),
-                           bg=self.stockBackground, fg=self.foregroundColor, padx=5, pady=5)
+                           bg=self.stockBackground, fg=self.foregroundColor, padx=5, pady=5, cursor='hand2')
         self.label.grid(column=self.column, row=self.row, sticky='news')
         self.label.bind("<Button-1>", lambda e: self.change(self.stocks[i][0]))
         self.column += 1
