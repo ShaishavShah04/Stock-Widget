@@ -9,7 +9,7 @@ from GUI import topStocksGUI
 from GUI import searchBarGUI
 from GUI import graphGUI
 from GUI import newsGUI
-from GUI import stockinfo
+from GUI import stockinfoGUI
 from matplotlib.figure import Figure
 import matplotlib.animation as animation
 from matplotlib import rcParams
@@ -64,7 +64,7 @@ class Engine:
         self.newsfeed = newsGUI.NewsfeedGUI(self.window, self.pageFinviz)
 
         # Stock info GUI
-        self.stockInfo = stockinfo.StockInfo(self.window, self.pageFinviz)
+        self.stockInfo = stockinfoGUI.StockInfo(self.window, self.pageFinviz)
 
     # Modify Methods #
     def createGraphVars(self):

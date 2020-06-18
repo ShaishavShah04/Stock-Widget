@@ -41,7 +41,7 @@ class NewsfeedGUI:
                                bg=self.backgroundColor, fg=self.foregroundColor, padx=3, pady=2, wraplength=100,
                                justify=LEFT)
         news = Label(self.newsFrame, text=self.news[i][0], font=('Helvetica', '9'), bg=self.backgroundColor,
-                     fg=self.foregroundColor, padx=2, pady=2, wraplength=315, justify=LEFT, cursor='hand1')
+                     fg=self.foregroundColor, padx=2, pady=2, wraplength=315, justify=LEFT, cursor='hand2')
 
         news.bind("<Button-1>", lambda e: self.callback(self.news[i][2]))
 

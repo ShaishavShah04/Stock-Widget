@@ -65,42 +65,16 @@ def getStockInfo(page): # returns stock name, full stock name, index, price, cha
     title = title.replace(stockName + ' ', '') # removes the ticker from the stockname
     title = title.replace(',', '')
 
-    indexText = page.find(text='Index') # find index
-    tdTag = indexText.parent
-    index = tdTag.findNext('td').text
+    searchText = ('Index', 'Market Cap', 'Change', 'Dividend %', 'P/E', '52W High', '52W Low', 'Perf Week', 'Perf Month', 'Perf Year', 'Perf YTD')
 
-    markCapText = page.find(text='Market Cap') # find market cap
-    tdTag = markCapText.parent
-    markCap = tdTag.findNext('td').text
+    info = [title, stockName]
 
-    # code in case we need to use finviz website for price
-    '''
-    priceText = page.find(text='Price') # find price
-    tdTag = priceText.parent
-    price = tdTag.findNext('td').text
-    '''
+    for i in range(len(searchText)):
+        textSearch = page.find(text=searchText[i])
+        idTag = textSearch.parent
+        info.append(idTag.findNext('td').text)
 
-    changeText = page.find(text='Change') # find change
-    tdTag = changeText.parent
-    change = tdTag.findNext('td').text
-
-    dividendText = page.find(text='Dividend %') # find div yield
-    tdTag = dividendText.parent
-    divident = tdTag.findNext('td').text
-
-    PEText = page.find(text='P/E')  # find P/E
-    tdTag = PEText.parent
-    PE = tdTag.findNext('td').text
-
-    wHighText = page.find(text='52W High')  # find 52 week high
-    tdTag = wHighText.parent
-    wHigh = tdTag.findNext('td').text
-
-    wLowText = page.find(text='52W High')  # find 52 week high
-    tdTag = wLowText.parent
-    wLow = tdTag.findNext('td').text
-
-    return stockName, title, index, change, markCap, divident, PE, wHigh, wLow
+    return info
 
 if __name__ == '__main__':
     applePage = webScrapeURL("https://finviz.com/quote.ashx?t=AAPL")
