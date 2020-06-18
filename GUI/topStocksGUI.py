@@ -36,10 +36,10 @@ class TopStocksGUI:
         self.titleLabel = Label(self.topStockFrame, text='TOP STOCKS', font=('Helvetica', '12', 'bold'), bg=self.backgroundColor, fg=self.foregroundColor, padx=10, pady=10.5)
         self.titleLabel.grid(columnspan=7, sticky='news')
 
-        stockBackground = 'gray22'
+        self.stockBackground = 'gray22'
 
         for i in range(10):
-            self.makeNewsBar(i,stockBackground)
+            self.makeNewsBar(i)
 
         self.topStockFrame.grid_propagate(0)
 
@@ -49,9 +49,9 @@ class TopStocksGUI:
         self.engine.getGraphClass().values = []
         self.engine.getGraphClass().times = []
 
-    def makeNewsBar(self,i,stockBackground):
+    def makeNewsBar(self,i):
         self.label = Label(self.topStockFrame, text=self.stocks[i][0], font=('Helvetica', '10', 'bold'),
-                           bg=stockBackground, fg=self.foregroundColor, padx=5, pady=5)
+                           bg=self.stockBackground, fg=self.foregroundColor, padx=5, pady=5)
         self.label.grid(column=self.column, row=self.row, sticky='news')
         self.label.bind("<Button-1>", lambda e: self.change(self.stocks[i][0]))
         self.column += 1
@@ -91,15 +91,13 @@ class TopStocksGUI:
         self.label.grid(column=self.column, row=self.row, sticky=W)
         self.column += 1
 
-        if stockBackground == 'gray22':
-            stockBackground = self.backgroundColor
+        if self.stockBackground == 'gray22':
+            self.stockBackground = self.backgroundColor
         else:
-            stockBackground = 'gray22'
+            self.stockBackground = 'gray22'
 
         self.row += 1
         self.column = 0
-
-
 
     def getStocks(self):
         return self.stocks
