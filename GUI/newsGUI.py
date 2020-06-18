@@ -15,6 +15,7 @@ class NewsfeedGUI:
         self.backgroundColor = 'gray12'
         self.foregroundColor = 'white'
 
+
         self.newsFrame = Frame(window, height=374, width=425, bg=self.backgroundColor)
         self.newsFrame.grid(row=3, column=8, rowspan=3, sticky='s')
 
@@ -31,6 +32,8 @@ class NewsfeedGUI:
 
             self.publisherLabel.grid(row=self.row, column=1, sticky=W)
             self.newsLabel.grid(row=self.row, column=2, sticky=W)
+
+            self.newsLabel.grid_propagate(0)
 
             self.row+=1
 

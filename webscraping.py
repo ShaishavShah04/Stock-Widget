@@ -63,6 +63,7 @@ def getStockInfo(page): # returns stock name, full stock name, index, price, cha
     stockName = page.find('a', {'id': 'ticker'}).text # find stock name
     title = page.find('title').text # find full name of stock
     title = title.replace(stockName + ' ', '') # removes the ticker from the stockname
+    title = title.replace(',', '')
 
     indexText = page.find(text='Index') # find index
     tdTag = indexText.parent
@@ -83,7 +84,23 @@ def getStockInfo(page): # returns stock name, full stock name, index, price, cha
     tdTag = changeText.parent
     change = tdTag.findNext('td').text
 
-    return stockName, title, index, change, markCap
+    dividendText = page.find(text='Dividend %') # find div yield
+    tdTag = dividendText.parent
+    divident = tdTag.findNext('td').text
+
+    PEText = page.find(text='P/E')  # find P/E
+    tdTag = PEText.parent
+    PE = tdTag.findNext('td').text
+
+    wHighText = page.find(text='52W High')  # find 52 week high
+    tdTag = wHighText.parent
+    wHigh = tdTag.findNext('td').text
+
+    wLowText = page.find(text='52W High')  # find 52 week high
+    tdTag = wLowText.parent
+    wLow = tdTag.findNext('td').text
+
+    return stockName, title, index, change, markCap, divident, PE, wHigh, wLow
 
 if __name__ == '__main__':
     applePage = webScrapeURL("https://finviz.com/quote.ashx?t=AAPL")
