@@ -20,7 +20,7 @@ class NewsfeedGUI:
         self.newsFrame.grid(row=3, column=8, rowspan=3, sticky='s')
 
         self.titleLabel = Label(self.newsFrame, text="LATEST NEWS", font=('Helvetica', '12', 'bold'), bg=self.backgroundColor, fg=self.foregroundColor, padx=10, pady=10.5)
-        self.titleLabel.grid(row=0, columnspan=3, sticky='news')
+        self.titleLabel.grid(row=0, columnspan=4, sticky='news')
 
         self.row = 1
 
@@ -30,6 +30,9 @@ class NewsfeedGUI:
             self.news_row = self.createnews(i)
             self.newsArray.append(self.news_row)
             self.newsArray[i][1].grid_propagate(0)
+
+        for i in range(1,9):
+            self.newsFrame.rowconfigure(i, weight=100)
 
         self.newsFrame.grid_propagate(0)
 
