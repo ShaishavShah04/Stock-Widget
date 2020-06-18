@@ -61,9 +61,13 @@ class SearchBarGUI:
 
         errorBox.protocol('WM_DELETE_WINDOW', off)
 
+        # try:
         while on:
             errorBox.update_idletasks()
             errorBox.update()
+        #except:
+        #    off()
+
 
     #Getter
     def getTicker(self):

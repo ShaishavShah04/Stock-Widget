@@ -9,7 +9,10 @@ from webscraping import ScrapeTop, ScrapeDown, webScrapeURL
 from GUI import engineGUI
 
 class TopStocksGUI:
-    def __init__(self, window):
+    def __init__(self, window,engine):
+
+        self.engine= engine
+
         page = webScrapeURL("https://finviz.com/")
 
         topArray = ScrapeTop(page)
@@ -36,53 +39,67 @@ class TopStocksGUI:
         stockBackground = 'gray22'
 
         for i in range(10):
-            self.label = Label(self.topStockFrame, text=self.stocks[i][0], font=('Helvetica', '10', 'bold'), bg=stockBackground, fg=self.foregroundColor, padx=5, pady=5)
-            self.label.grid(column=self.column, row=self.row, sticky='news')
-            self.column += 1
-
-            self.label = Label(self.topStockFrame, text='LAST:', font=('Helvetica', '10', 'bold'),
-                               bg=self.backgroundColor, fg=self.foregroundColor, padx=5, pady=5)
-            self.label.grid(column=self.column, row=self.row, sticky=W)
-            self.column += 1
-
-            self.label = Label(self.topStockFrame, text=self.stocks[i][1], font=('Helvetica', '10'),
-                               bg=self.backgroundColor, fg=self.foregroundColor, padx=5, pady=5)
-            self.label.grid(column=self.column, row=self.row, sticky=W)
-            self.column += 1
-
-            self.label = Label(self.topStockFrame, text='CHANGE:', font=('Helvetica', '10', 'bold'), bg=self.backgroundColor, fg=self.foregroundColor, padx=5, pady=5)
-            self.label.grid(column=self.column, row=self.row, sticky=W)
-            self.column += 1
-
-            if '-' in self.stocks[i][2]:
-                changeColour = 'red'
-            else:
-                changeColour = 'green'
-
-            self.label = Label(self.topStockFrame, text=self.stocks[i][2], font=('Helvetica', '10', 'bold'), bg=self.backgroundColor,fg=changeColour, padx=5, pady=5)
-            self.label.grid(column=self.column, row=self.row, sticky=W)
-            self.column += 1
-
-            self.label = Label(self.topStockFrame, text='VOLUME:', font=('Helvetica', '10', 'bold'),
-                               bg=self.backgroundColor, fg=self.foregroundColor, padx=4, pady=5)
-            self.label.grid(column=self.column, row=self.row, sticky=W)
-            self.column += 1
-
-            self.label = Label(self.topStockFrame, text=self.stocks[i][3], font=('Helvetica', '10'),
-                               bg=self.backgroundColor, fg=self.foregroundColor, padx=4, pady=5)
-            self.label.grid(column=self.column, row=self.row, sticky=W)
-            self.column += 1
-
-            if stockBackground == 'gray22':
-                stockBackground = self.backgroundColor
-            else:
-                stockBackground = 'gray22'
-
-            self.row += 1
-            self.column = 0
-
+            self.makeNewsBar(i,stockBackground)
 
         self.topStockFrame.grid_propagate(0)
+
+    def change(self,stock):
+        self.engine.currentTicker = stock
+        self.engine.changed = True
+        self.engine.getGraphClass().values = []
+        self.engine.getGraphClass().times = []
+
+    def makeNewsBar(self,i,stockBackground):
+        self.label = Label(self.topStockFrame, text=self.stocks[i][0], font=('Helvetica', '10', 'bold'),
+                           bg=stockBackground, fg=self.foregroundColor, padx=5, pady=5)
+        self.label.grid(column=self.column, row=self.row, sticky='news')
+        self.label.bind("<Button-1>", lambda e: self.change(self.stocks[i][0]))
+        self.column += 1
+
+        self.label = Label(self.topStockFrame, text='LAST:', font=('Helvetica', '10', 'bold'),
+                           bg=self.backgroundColor, fg=self.foregroundColor, padx=5, pady=5)
+        self.label.grid(column=self.column, row=self.row, sticky=W)
+        self.column += 1
+
+        self.label = Label(self.topStockFrame, text=self.stocks[i][1], font=('Helvetica', '10'),
+                           bg=self.backgroundColor, fg=self.foregroundColor, padx=5, pady=5)
+        self.label.grid(column=self.column, row=self.row, sticky=W)
+        self.column += 1
+
+        self.label = Label(self.topStockFrame, text='CHANGE:', font=('Helvetica', '10', 'bold'),
+                           bg=self.backgroundColor, fg=self.foregroundColor, padx=5, pady=5)
+        self.label.grid(column=self.column, row=self.row, sticky=W)
+        self.column += 1
+
+        if '-' in self.stocks[i][2]:
+            changeColour = 'red'
+        else:
+            changeColour = 'green'
+
+        self.label = Label(self.topStockFrame, text=self.stocks[i][2], font=('Helvetica', '10', 'bold'),
+                           bg=self.backgroundColor, fg=changeColour, padx=5, pady=5)
+        self.label.grid(column=self.column, row=self.row, sticky=W)
+        self.column += 1
+
+        self.label = Label(self.topStockFrame, text='VOLUME:', font=('Helvetica', '10', 'bold'),
+                           bg=self.backgroundColor, fg=self.foregroundColor, padx=4, pady=5)
+        self.label.grid(column=self.column, row=self.row, sticky=W)
+        self.column += 1
+
+        self.label = Label(self.topStockFrame, text=self.stocks[i][3], font=('Helvetica', '10'),
+                           bg=self.backgroundColor, fg=self.foregroundColor, padx=4, pady=5)
+        self.label.grid(column=self.column, row=self.row, sticky=W)
+        self.column += 1
+
+        if stockBackground == 'gray22':
+            stockBackground = self.backgroundColor
+        else:
+            stockBackground = 'gray22'
+
+        self.row += 1
+        self.column = 0
+
+
 
     def getStocks(self):
         return self.stocks
