@@ -27,20 +27,24 @@ class NewsfeedGUI:
         self.newsArray = []
 
         for i in range(8):
-            self.publisherLabel = Label(self.newsFrame, text=self.news[i][1], font=('Helvetica', '7', 'bold'), bg=self.backgroundColor, fg=self.foregroundColor, padx=3, pady=2, wraplength=100, justify=LEFT)
-            self.newsArray.append(Label(self.newsFrame, text=self.news[i][0], font=('Helvetica', '9'), bg=self.backgroundColor, fg=self.foregroundColor, padx=2, pady=2, wraplength=315, justify=LEFT, cursor='hand1'))
-
-            self.newsArray[i].bind("<Button-1>", lambda e: self.callback(self.news[i][2]))
-
-            self.publisherLabel.grid(row=self.row, column=1, sticky=W)
-            self.newsArray[i].grid(row=self.row, column=2, sticky=W)
-
-            self.newsArray[i].grid_propagate(0)
-
-            self.row+=1
+            self.news_row = self.createnews(i)
+            self.newsArray.append(self.news_row)
+            self.newsArray[i][1].grid_propagate(0)
 
         self.newsFrame.grid_propagate(0)
 
     def callback(self, url):
         webbrowser.open_new(url)
 
+    def createnews(self,i):
+        publisherLabel = Label(self.newsFrame, text=self.news[i][1], font=('Helvetica', '7', 'bold'),
+                               bg=self.backgroundColor, fg=self.foregroundColor, padx=3, pady=2, wraplength=100,
+                               justify=LEFT)
+        news = Label(self.newsFrame, text=self.news[i][0], font=('Helvetica', '9'), bg=self.backgroundColor,
+                     fg=self.foregroundColor, padx=2, pady=2, wraplength=315, justify=LEFT, cursor='hand1')
+
+        news.bind("<Button-1>", lambda e: self.callback(self.news[i][2]))
+
+        publisherLabel.grid(row=i + 1, column=1, sticky=W)
+        news.grid(row=i + 1, column=2, sticky=W)
+        return (publisherLabel,news)
