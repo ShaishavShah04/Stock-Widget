@@ -33,7 +33,7 @@ class Engine:
             # Checking for updates
 
         # Top Stocks
-        self.topStocks = topStocksGUI.TopStocksGUI(self.window)
+        self.topStocks = topStocksGUI.TopStocksGUI(self.window,self)
 
         # Graph -- Much of the graph config has to be done here since the variables have to be accessed in this file.
             # Colors
