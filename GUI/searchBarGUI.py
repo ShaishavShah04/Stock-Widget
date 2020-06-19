@@ -2,7 +2,7 @@ from tkinter import *
 from webscraping import getLivePrice, webScrapeURL
 
 class SearchBarGUI:
-    def __init__(self, window,engine):
+    def __init__(self, window, engine):
         self.searchBarBackground = 'gray12'
         self.searchBarForeground = 'white'
 
@@ -50,7 +50,7 @@ class SearchBarGUI:
         errorWindow = Tk()
         errorWindow.wm_title("Error")
         errorWindow.geometry("250x100")
-        errorWindow.resizable(False, False)
+        errorWindow.resizable(True, False)
         errorWindow.configure(bg='gray20')
 
         message = Label(errorWindow, text='No results found for "{ticker}"'.format(ticker=self.searchBar.get()), fg='white', bg='gray20', font=('Helvetica', '13'), justify=CENTER, padx=10, pady=10)
@@ -62,7 +62,8 @@ class SearchBarGUI:
         message.rowconfigure(1, weight=100)
         message.columnconfigure(0, weight=100)
 
-        errorWindow.grid_propagate(0)
+        message.grid_propagate(0)
+        # errorWindow.grid_propagate(0)
 
         errorWindow.protocol('WM_DELETE_WINDOW', off)
 

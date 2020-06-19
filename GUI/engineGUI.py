@@ -10,8 +10,6 @@ from GUI import searchBarGUI
 from GUI import graphGUI
 from GUI import newsGUI
 from GUI import stockinfoGUI
-from matplotlib.figure import Figure
-import matplotlib.animation as animation
 from matplotlib import rcParams
 import matplotlib.pyplot as plt
 from webscraping import *
@@ -85,26 +83,3 @@ class Engine:
         return self.graphGUI
     def getTicker(self):
         return self.currentTicker
-
-
-if __name__ == "__main__":
-    #
-    on = True
-    def updateOn():
-        global on
-        on = False
-    #
-    window = Engine()
-    # Animate
-    ani = animation.FuncAnimation(window.fig,window.getGraphClass().animate,fargs=(window.getGraphClass().times, window.getGraphClass().values,window.getTicker(),window),interval=2000,cache_frame_data=False)
-    # Running it
-
-    window.getWindow().protocol('WM_DELETE_WINDOW',updateOn) # To not get Error when window is closed
-
-    while on:
-        window.window.update_idletasks()
-        window.window.update()
-        if window.changed:
-            window.updateEverything()
-            ani.__init__(window.fig,window.getGraphClass().animate,fargs=(window.getGraphClass().times, window.getGraphClass().values,window.getTicker(),window),interval=2000,cache_frame_data=False)
-
