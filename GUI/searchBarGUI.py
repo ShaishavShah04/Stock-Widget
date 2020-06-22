@@ -81,8 +81,3 @@ class SearchBarGUI:
                 errorWindow.update()
             except:
                 off()
-
-
-    #Getter
-    def getTicker(self):
-        return self.enteredTicker

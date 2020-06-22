@@ -50,17 +50,18 @@ class Engine:
         self.graph = self.fig.add_subplot(1, 1, 1)
         self.graph.set_facecolor('#454444')
 
-            # Gui
+            # Graph Gui
         self.graphGUI =  graphGUI.GraphGUI(self.window,self.fig,self.graph)
 
         # Stock info
         self.urlFinviz = "https://finviz.com/quote.ashx?t={0}".format(self.currentTicker) # URL FOR FINVIZ
         self.urlYahoo = 'https://ca.finance.yahoo.com/quote/{0}'.format(self.currentTicker) # URL FOR YAHOO FINANCE
 
-        self.pageFinviz = webScrapeURL(self.urlFinviz)
-        self.pageYahoo= webScrapeURL(self.urlYahoo)
+        self.pageFinviz = webScrapeURL(self.urlFinviz) # webscrape the finviz page
+        self.pageYahoo= webScrapeURL(self.urlYahoo) # webscrape the yahoo page
 
-        self.newsfeed = newsGUI.NewsfeedGUI(self.window, self.pageFinviz)
+        # News feed GUI
+        self.newsfeed = newsGUI.NewsfeedGUI(self.window, self.pageFinviz) # create the news feed
 
         # Stock info GUI
         self.stockInfo = stockinfoGUI.StockInfo(self.window, self.pageFinviz)
