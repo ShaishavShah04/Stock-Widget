@@ -13,7 +13,6 @@ if __name__ == '__main__':
     def updateOn():
         global on
         on = False
-
     #
     window = engineGUI.Engine()
     # Animate
@@ -25,6 +24,7 @@ if __name__ == '__main__':
     window.getWindow().protocol('WM_DELETE_WINDOW', updateOn)  # To not get Error when window is closed
 
     while on:
+
         window.window.update_idletasks()
         window.window.update()
         if window.changed:

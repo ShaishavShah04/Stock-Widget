@@ -17,23 +17,25 @@ from webscraping import *
 
 class Engine:
     def __init__(self):
+
+        # The basics of creating a window here... Nothing fancy
         self.window = Tk()
         self.window.minsize(1028, 720)
         self.window.title("Stock Trader")
         self.window.configure(bg="#1c1c1c")
-        self.window.resizable(False, False)
-        self.currentTicker = 'SPY'
-        self.changed = False
+        self.window.resizable(False, False) # Keeping it non-resizeable so it doesn't alter how the content will look
+        self.currentTicker = 'SPY' # Default stock shown
+        self.changed = False # To identify if the stock has been changed
         #
 
         # Search
         self.searchBar = searchBarGUI.SearchBarGUI(self.window,self)
-            # Checking for updates
 
         # Top Stocks
         self.topStocks = topStocksGUI.TopStocksGUI(self.window,self)
 
         # Graph -- Much of the graph config has to be done here since the variables have to be accessed in this file.
+
             # Colors
 
         rcParams['axes.labelcolor'] = 'white'
@@ -43,7 +45,7 @@ class Engine:
         rcParams['text.color'] = 'white'
 
             # Configs
-        self.fig = plt.figure(figsize=(7, 3), dpi=100)
+        self.fig = plt.figure(figsize=(7, 3), dpi=100) # Basically a 700x300 i,age
         self.fig.patch.set_facecolor("#1c1c1c")
         self.graph = self.fig.add_subplot(1, 1, 1)
         self.graph.set_facecolor('#454444')
@@ -52,7 +54,6 @@ class Engine:
         self.graphGUI =  graphGUI.GraphGUI(self.window,self.fig,self.graph)
 
         # Stock info
-        # self.stockTicker = 'AAPL' ### TO BE CHANGED LATER
         self.urlFinviz = "https://finviz.com/quote.ashx?t={0}".format(self.currentTicker) # URL FOR FINVIZ
         self.urlYahoo = 'https://ca.finance.yahoo.com/quote/{0}'.format(self.currentTicker) # URL FOR YAHOO FINANCE
 
@@ -65,18 +66,17 @@ class Engine:
         self.stockInfo = stockinfoGUI.StockInfo(self.window, self.pageFinviz)
 
     # Modify Methods #
-    def createGraphVars(self):
-        pass
 
-    def changeTicker(self,ticker):
+    def changeTicker(self,ticker): # Self-explanatory
         self.currentTicker = ticker
         self.graphGUI.ticker = ticker
 
-    def updateEverything(self):
+    def updateEverything(self): # Re-Init stuff which changes based on stocks
         self.newsfeed.__init__(self.window,webScrapeURL("https://finviz.com/quote.ashx?t={0}".format(self.currentTicker)))
         self.stockInfo.__init__(self.window,webScrapeURL("https://finviz.com/quote.ashx?t={0}".format(self.currentTicker)))
 
     # Accessor Methods #
+
     def getWindow(self):
         return self.window
     def getGraphClass(self):

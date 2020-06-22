@@ -13,9 +13,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 import requests
 
-
 # Making a function which can later be added into a stock class as a method.
-
 
 def getLivePrice(ticker): # Getting the live prices
     url = 'https://ca.finance.yahoo.com/quote/{0}'.format(ticker) # The url used
@@ -29,7 +27,7 @@ def getLivePrice(ticker): # Getting the live prices
 
 
 
-def write_to_csv(value1, value2, ticker):
+def write_to_csv(value1, value2, ticker): # This is for safe keeping data... In the rare case that we use it again.
     # making directory to store Stock Data
     if not os.path.exists('StockData'):
         os.mkdir('StockData')
@@ -38,23 +36,13 @@ def write_to_csv(value1, value2, ticker):
         f.writelines(value1 + "," + value2 + "\n")
         f.close()
 
-def read_csv():
+def read_csv(ticker):
     with open(os.path.join(os.getcwd()+"/StockData",'liveprices{0}.csv'.format(ticker)),'r') as f:
         data = csv.reader(f)
         for row in data:
             print(row)
         print('\n')
         f.close()
-
-
-if __name__ == "__main__":
-    from time import sleep
-    ticker = 'AMD'
-    for i in range(5):
-        sleep(0.7) # I calculated this time to be the difference 1 and time it takes to grab data from google
-        value,time = getLivePrice(ticker)
-        write_to_csv(time,value,ticker)
-        read_csv()
 
 
 

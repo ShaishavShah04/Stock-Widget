@@ -24,24 +24,31 @@ class SearchBarGUI:
         self.searchButton = Button(self.searchBarFrame, command=self.submitClick, bg='gray16', fg=self.searchBarForeground, text='Search',font=('Helvetica', '12', 'bold'), borderwidth=0, width=15)
         self.searchButton.grid(row=1, column=5, sticky='news')
         self.searchButton.grid_propagate(0)
+
         # Engine Shadow
         self.engine = engine
 
     # Submit button:
     def submitClick(self):
         try:
+            # Checks to see if stock is real
             page = webScrapeURL('https://ca.finance.yahoo.com/quote/{0}'.format((self.searchBar.get()).upper()))
             t,p = getLivePrice(page)
+
+
+            # Changes stuff in the engine
             self.enteredTicker = (self.searchBar.get()).upper()
             self.engine.currentTicker = self.enteredTicker
             self.engine.changed = True
             self.engine.getGraphClass().values = []
             self.engine.getGraphClass().times = []
+            # Clear the search bar
             self.searchBar.delete(0, END)
         except:
+
             self.errorMessage()
 
-    def errorMessage(self):
+    def errorMessage(self): # Seperate Pop-Up window which makes the Error Box
         on = True
         def off():
             global on
@@ -49,7 +56,7 @@ class SearchBarGUI:
 
         errorWindow = Tk()
         errorWindow.wm_title("Error")
-        errorWindow.geometry("250x100")
+        errorWindow.geometry("350x100")
         errorWindow.resizable(True, False)
         errorWindow.configure(bg='gray20')
 
@@ -69,10 +76,11 @@ class SearchBarGUI:
 
         # try:
         while on:
-            errorWindow.update_idletasks()
-            errorWindow.update()
-        #except:
-        #    off()
+            try:
+                errorWindow.update_idletasks()
+                errorWindow.update()
+            except:
+                off()
 
 
     #Getter

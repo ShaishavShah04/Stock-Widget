@@ -45,7 +45,7 @@ if __name__ == "__main__":
     graph.set_facecolor('#0F0F0F')
     times = []
     prices = []
-    ani = animation.FuncAnimation(fig,animate,fargs=(times,prices,ticker),interval=1500)
+    ani = animation.FuncAnimation(fig,animate2,fargs=(times,prices,ticker),interval=1500)
     plt.show()
 
 
