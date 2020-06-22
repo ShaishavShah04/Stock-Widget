@@ -14,7 +14,6 @@ from matplotlib import rcParams
 import matplotlib.pyplot as plt
 from webscraping import *
 
-
 class Engine:
     def __init__(self):
 
@@ -26,6 +25,7 @@ class Engine:
         self.window.resizable(False, False) # Keeping it non-resizeable so it doesn't alter how the content will look
         self.currentTicker = 'SPY' # Default stock shown
         self.changed = False # To identify if the stock has been changed
+        self.window.iconphoto(False, PhotoImage(file='favicon.png'))
         #
 
         # Search
