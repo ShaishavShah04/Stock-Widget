@@ -2,7 +2,6 @@
 Shaishav Shah
 This file will update live prices for a specified Ticker (eg. AAPL, FB, etc) and write these in an .csv file
 Modules Required:
- - Pandas
  - BeautifulSoup
  - DateTime Module
 """
