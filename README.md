@@ -1,10 +1,8 @@
-# CSE3910-Final-Project : Live Stock Prices
+# Stock Widget
 
-What you need to install:
-- BeautifulSoup4
-- Pandas
-- Requests
-- lxml
-- html parser
+Search up any stock you want and find relevant information such as live prices, change, dividend yield, etc. The widget also contains an animated graph with the stock price, top news articles, and trending stocks worldwide. Just enter the stock ticker you want into the search bar!
 
--- I can make the code install the libraries Palaash.... I will add that at the very end of our code so the user only has to run the thing
+## How to run
+- install ```pip```
+- run download.py to install the necessary files (Only required once)
+- run main.py 
