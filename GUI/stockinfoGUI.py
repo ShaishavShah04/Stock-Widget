@@ -18,7 +18,7 @@ class StockInfo: # stock info GUI
         self.stockInfoFrame.grid(row=5, column=1, columnspan=7, sticky='sw', rowspan=2) # place frame
 
         # Arrays with titles and information for stock info
-        self.allTitles = ('Ticker: ', 'Index: ', 'Market Cap: ', 'Index: ', 'Dividend %: ', 'P/E Ratio: ', '52 W High: ', '52 W Low: ', 'Perf Week: ', 'Perf Month: ', 'Perf Year: ', 'Perf YTD: ') # stores titles to automate label creation process
+        self.allTitles = ('Ticker: ', 'Index: ', 'Market Cap: ', 'Change: ', 'Dividend %: ', 'P/E Ratio: ', '52 W High: ', '52 W Low: ', 'Perf Week: ', 'Perf Month: ', 'Perf Year: ', 'Perf YTD: ') # stores titles to automate label creation process
 
         self.allInfo = [] # stores all of the data about the stock
 
