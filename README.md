@@ -18,3 +18,7 @@ If you do not have these modules, run ```download.py``` to install any / update 
   
 Now, to finally run the StockTrader program, run the ```main.py``` file.
 
+### Note:
+ 
+In order to see the graph change frequently, you have to run the graph in market hours. This translates to 7:30 AM to 2 PM in Edmonton time.  
+
