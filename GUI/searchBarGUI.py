@@ -1,18 +1,23 @@
+"""
+Shaishav Shah
+The search bar is in this file
+"""
+
 from tkinter import *
 from webscraping import getLivePrice, webScrapeURL
 
 class SearchBarGUI:
     def __init__(self, window, engine):
+
         self.searchBarBackground = 'gray12'
         self.searchBarForeground = 'white'
-
-        self.enteredTicker = 'SPY'
+        self._enteredTicker = 'SPY'
 
         # Frame
         self.searchBarFrame = Frame(window, height = 55, width = 600, pady = 5, bg=self.searchBarBackground)
         self.searchBarFrame.grid(row=1, column=1, columnspan=7, sticky='n')
 
-        # Label, Input, And Submit
+        # Label, Input, And Submit fields
         self.tickerLabel = Label(self.searchBarFrame, text="Enter Ticker: ", font=('Helvetica', '12', 'bold'),bg=self.searchBarBackground, fg=self.searchBarForeground)
         self.tickerLabel.grid(row=1, column=1, sticky='news', pady=5, padx=(20, 5))
         self.tickerLabel.grid_propagate(0)
@@ -36,15 +41,17 @@ class SearchBarGUI:
             t,p = getLivePrice(page)
 
 
-            # Changes stuff in the engine
-            self.enteredTicker = (self.searchBar.get()).upper()
-            self.engine.currentTicker = self.enteredTicker
+            # Changes ticker in the engine and reset values
+            self._enteredTicker = (self.searchBar.get()).upper()
+            self.engine.currentTicker = self._enteredTicker
             self.engine.changed = True
             self.engine.getGraphClass().values = []
             self.engine.getGraphClass().times = []
+
             # Clear the search bar
             self.searchBar.delete(0, END)
-        except:
+
+        except: # Any sort of error which occurs, the program will print that the stock / entered ticker was invalid
 
             self.errorMessage()
 

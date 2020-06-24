@@ -30,5 +30,8 @@ if __name__ == '__main__':
         if window.changed:
             window.updateEverything()
             ani.__init__(window.fig, window.getGraphClass().animate, fargs=(
-            window.getGraphClass().times, window.getGraphClass().values, window.getTicker(), window), interval=2000,
+                                                                            window.getGraphClass().times,
+                                                                            window.getGraphClass().values,
+                                                                            window.getTicker(), window
+                                                                            ), interval=2000,
                          cache_frame_data=False)

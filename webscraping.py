@@ -2,6 +2,8 @@
 title: Webscraping Functions File
 authors: Palaash Kolhe & Shaishav Shah
 date created: 2020-06-10
+
+Seperate file for more specific web scrapes... They are based off the live_prices.py file
 '''
 
 from bs4 import BeautifulSoup

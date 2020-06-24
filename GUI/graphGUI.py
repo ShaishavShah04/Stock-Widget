@@ -1,17 +1,19 @@
 """
 Shaishav Shah
-Trying to create a graph GUI
-
 """
+
 from tkinter import *
 import matplotlib
 from live_prices import write_to_csv, getLivePrice
 matplotlib.use("TkAgg") # Backend of Matplotlib
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
+
+
 
 class GraphGUI:
     def __init__(self,window,fig,graph):
+
         self.GraphFrame = Frame(window,height=300,width=700, bg = 'grey22')
         self.GraphFrame.grid(row=1,column=1, rowspan=3, sticky=S)
         self.ticker = 'SPY'
@@ -29,6 +31,8 @@ class GraphGUI:
         canvas.draw()
         canvas.get_tk_widget().grid(row=1,column=1)
         self.GraphFrame.grid_propagate(0)
+
+    #  Modify Methods
 
     def animate(self,i, x_list, y_list,ticker,window):
         p, t = getLivePrice(ticker)
