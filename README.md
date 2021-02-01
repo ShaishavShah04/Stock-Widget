@@ -2,6 +2,8 @@
 
 Search up any stock you want and find relevant information such as live prices, change, dividend yield, etc. The widget also contains an animated graph with the stock price, top news articles, and trending stocks worldwide. Just enter the stock ticker you want into the search bar!
 
+![Stock Widget Capture](images/Capture.PNG)
+
 Any stock you search up will also record the data for that stock in a csv file. This data can be found within this working directing in a folder called ```StockData```. This data will be avaliable for the user to perform more advanced technical analysis. 
 ## How to run
 
